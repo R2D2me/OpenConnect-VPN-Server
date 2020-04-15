@@ -39,18 +39,10 @@ certtool --generate-privkey --outfile server-key.pem
 certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
 
 echo -e "\e[32mInstalling ocserv\e[39m"
-apt install ocserv
-cp /etc/ocserv/ocserv.conf ~/certificates/
-
-sed -i -e 's@auth = "@#auth = "@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@auth = "pam@auth = "#auth = "pam"@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@try-mtu-discovery = @try-mtu-discovery = true@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@dns = @#dns = @g' /etc/ocserv/ocserv.conf
-sed -i -e 's@# multiple servers.@dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@route =@#route =@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@no-route =@#no-route =@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@cisco-client-compat@cisco-client-compat = true@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@##auth = "#auth = "pam""@auth = "plain[passwd=/etc/ocserv/ocpasswd]"@g' /etc/ocserv/ocserv.conf
+apt install ocserv -y
+cd /etc/ocserv/
+rm -rf ocserv.conf
+wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/ocserv.conf
 
 sed -i -e 's@server-cert = /etc/ssl/certs/ssl-cert-snakeoil.pem@server-cert = /etc/ocserv/server-cert.pem@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@server-key = /etc/ssl/private/ssl-cert-snakeoil.key@server-key = /etc/ocserv/server-key.pem@g' /etc/ocserv/ocserv.conf
