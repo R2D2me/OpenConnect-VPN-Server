@@ -6,7 +6,7 @@ Tested on ubuntu 18.04 and 16.04.
 
 Get the script on your server
 ```bash
-curl -O https://raw.githubusercontent.com/iw4p/OpenConnect-VPN-Server/master/ocserv-install.sh
+curl -O https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/ocserv-install.sh
 chmod +x ocserv-install.sh
 ```
 
