@@ -39,7 +39,7 @@ certtool --generate-privkey --outfile server-key.pem
 certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
 
 echo -e "\e[32mInstalling ocserv\e[39m"
-apt install ocserv -y
+apt install ocserv apache2 expect lynx -y
 cd /etc/ocserv/
 rm -rf ocserv.conf
 wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/ocserv.conf
