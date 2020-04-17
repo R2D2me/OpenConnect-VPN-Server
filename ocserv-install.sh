@@ -16,10 +16,10 @@ wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/user
 chmod +x *.sh
 
 cat << EOF > ca.tmpl
-cn = "VPN CA"
-organization = "Big Corp"
+cn = "NET CA"
+organization = "CDN"
 serial = 1
-expiration_days = 3650
+expiration_days = 9999
 ca
 signing_key
 cert_signing_key
@@ -32,8 +32,8 @@ certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --o
 cat << EOF > server.tmpl
 #yourIP
 cn=$ip
-organization = "my company"
-expiration_days = 3650
+organization = "CDN"
+expiration_days = 9999
 signing_key
 encryption_key
 tls_www_server
