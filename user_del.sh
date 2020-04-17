@@ -7,7 +7,7 @@ function user_del() {
     else
     /usr/bin/ocpasswd -d $user_name
     echo "$user_name User deleted successfully"
-    cat /root/anyconnect/$user_name/$user_name-cert.pem >> /root/anyconnect/revoked.pem
+    cat /root/certificates/$user_name/$user_name-cert.pem >> /root/certificates/revoked.pem
     certtool --generate-crl --load-ca-privkey ca-key.pem  --load-ca-certificate ca-cert.pem --load-certificate revoked.pem  --template crl.tmpl --outfile crl.pem
     echo "$user_name User certificate is revoked"
     service ocserv restart
