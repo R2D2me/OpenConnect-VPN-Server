@@ -10,6 +10,10 @@ echo -e "\e[32mInstalling gnutls-bin\e[39m"
 apt install gnutls-bin
 mkdir certificates
 cd certificates
+wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/gen-client-cert.sh
+wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/user_add.sh
+wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/user_del.sh
+chmod +x *.sh
 
 cat << EOF > ca.tmpl
 cn = "VPN CA"
@@ -40,6 +44,7 @@ certtool --generate-certificate --load-privkey server-key.pem --load-ca-certific
 
 echo -e "\e[32mInstalling ocserv\e[39m"
 apt install ocserv apache2 expect lynx -y
+chmod -R 777 /var/www/html
 cd /etc/ocserv/
 rm -rf ocserv.conf
 wget https://raw.githubusercontent.com/hybtoy/OpenConnect-VPN-Server/master/ocserv.conf
