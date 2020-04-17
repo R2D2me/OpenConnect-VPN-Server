@@ -29,11 +29,11 @@ END
 }
 #增加证书用户函数
 function cert_add() {
-cd /root/anyconnect
+cd /root/certificates
 mkdir $user_name
 cd $user_name
 expect<<-END
-spawn ../gen-client-cert.sh $user_name /root/anyconnect
+spawn ../gen-client-cert.sh $user_name /root/certificates
 expect "Enter Export Password:"
 send "$user_pass\r"
 expect "Verifying - Enter Export Password:"
@@ -41,7 +41,7 @@ send "$user_pass\r"
 expect eof
 exit
 END
-cp /root/anyconnect/$user_name/$user_name.p12 /var/www/html/
+cp /root/certificates/$user_name/$user_name.p12 /var/www/html/
 echo "$user_name The user is successfully created and the password is $user_pass"
 echo "$user_name The user's certificate was created successfully. Click the following link to download."
 echo "http://$public_ip/$user_name.p12"  
